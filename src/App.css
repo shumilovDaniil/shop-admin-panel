@@ -1,0 +1,84 @@
+.container {
+    max-width: 1230px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.table {
+    display: grid;
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+.table.products {
+    grid-template-columns: minmax(150px, 1fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 3.33fr);
+}
+
+.table.categories {
+    grid-template-columns: minmax(150px, 1fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+}
+
+thead,
+tbody,
+tr {
+    display: contents;
+}
+
+th,
+td {
+    padding: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background: #6c7ae0;
+    text-align: left;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: white;
+}
+
+th:last-child {
+    border: 0;
+}
+
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #000000;
+    font-size: 18px;
+}
+
+tr:nth-child(even) td {
+    background: #f8f6ff;
+}
+
+.category_feature {
+    gap: 10px;
+    display: inline-flex;
+}
+
+.category_feature span {
+    padding: 3px;
+    color: #fff;
+    background-color: #ff9353;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    gap: 5px;
+}
