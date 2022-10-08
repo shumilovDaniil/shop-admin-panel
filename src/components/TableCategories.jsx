@@ -10,13 +10,13 @@ const TableCategories = ({categories}) => {
 
     const deleteCategory = async (id) => {
         const res = await fetch('http://shopyshop.somee.com/AdminPanel/DeleteCategory', {
-            method: "DELETE",
+            method: 'DELETE',
+            body: JSON.stringify({id: id}),
+            mode: 'cors',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(id)
         })
-        await console.log(res)
     }
 
     return (

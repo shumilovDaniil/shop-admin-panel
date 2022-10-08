@@ -5,11 +5,10 @@ const TableProducts = ({products}) => {
 
     return (
         <div>
-
             <h2>
                 <button onClick={() => setIsShow(!isShow)}>Список товаров</button>
             </h2>
-           
+
             {isShow && <table className="table products">
                 <thead className="product_col">
                 <tr className="product_item product_col">

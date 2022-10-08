@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import TableCategories from "./components/TableCategories";
 import TableProducts from "./components/TableProducts";
 import CreateCategoryForm from "./components/CreateCategoryForm";
+import CreateProductForm from "./components/CreateProductForm";
 
 function App() {
     const [products, setProducts] = useState([])
@@ -14,7 +15,9 @@ function App() {
     }, [])
 
     const getProducts = async () => {
-        const res = await fetch('http://shopyshop.somee.com/Shop/GetProducts');
+        const res = await fetch('http://shopyshop.somee.com/Shop/GetProducts', {
+            mode: 'cors'
+        });
         const data = await res.json()
 
         setProducts(data)
@@ -27,11 +30,11 @@ function App() {
         setCategories(data)
     }
 
-
     return (
         <div className='container'>
             <div>
                 <CreateCategoryForm/>
+                <CreateProductForm/>
             </div>
 
             <TableProducts products={products}/>
