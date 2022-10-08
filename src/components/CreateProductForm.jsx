@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from "axios";
 
 const CreateProductForm = () => {
     const [name, setName] = useState()
@@ -9,21 +10,33 @@ const CreateProductForm = () => {
 
     const createProduct = async (e) => {
         e.preventDefault();
-        
-        const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateProduct", {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                categoryId: Number(categoryId),
-                info: description,
-                price: Number(price),
-                rating: Number(rating)
-            }),
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+
+        axios.post('http://shopyshop.somee.com/AdminPanel/CreateProduct', {
+            name: "AXXXXXXX",
+            categoryId: 5,
+            info: "asdasdsad",
+            price: 2222,
+            rating: 2
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+        // const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateProduct", {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         name,
+        //         categoryId: Number(categoryId),
+        //         info: description,
+        //         price: Number(price),
+        //         rating: Number(rating)
+        //     }),
+        //     mode: 'cors',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // })
     }
 
     return (

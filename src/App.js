@@ -4,6 +4,7 @@ import TableCategories from "./components/TableCategories";
 import TableProducts from "./components/TableProducts";
 import CreateCategoryForm from "./components/CreateCategoryForm";
 import CreateProductForm from "./components/CreateProductForm";
+import axios from "axios";
 
 function App() {
     const [products, setProducts] = useState([])
@@ -15,19 +16,15 @@ function App() {
     }, [])
 
     const getProducts = async () => {
-        const res = await fetch('http://shopyshop.somee.com/Shop/GetProducts', {
-            mode: 'cors'
-        });
-        const data = await res.json()
-
-        setProducts(data)
+        const res = axios.get(`http://shopyshop.somee.com/Shop/GetProducts`).then(res => {
+            setProducts(res.data)
+        })
     }
 
     const getCategories = async () => {
-        const res = await fetch('http://shopyshop.somee.com/Shop/GetCategories');
-        const data = await res.json()
-
-        setCategories(data)
+        const res = axios.get(`http://shopyshop.somee.com/Shop/GetCategories`).then(res => {
+            setCategories(res.data)
+        })
     }
 
     return (
