@@ -29,13 +29,13 @@ function App() {
 
     return (
         <div className='container'>
-            <div>
-                <CreateCategoryForm/>
-                <CreateProductForm/>
+            <div className='flex'>
+                <CreateCategoryForm getCategories={() => getCategories()}/>
+                <CreateProductForm getProducts={() => getProducts()}/>
             </div>
 
-            <TableProducts products={products}/>
-            <TableCategories categories={categories}/>
+            <TableProducts products={products} getProducts={() => getProducts()}/>
+            <TableCategories categories={categories} getCategories={() => getCategories()}/>
         </div>
     );
 }

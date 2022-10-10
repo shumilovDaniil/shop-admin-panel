@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 
-const CreateCategoryForm = () => {
+const CreateCategoryForm = ({getCategories}) => {
+    const [isShow, setIsShow] = useState(false)
+
     const [name, setName] = useState('');
     const [parentName, setParentName] = useState('');
 
     const createCategory = async (e, name, parentCategoryId) => {
         e.preventDefault();
-
 
         const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateCategory", {
             method: 'POST',
@@ -18,22 +19,25 @@ const CreateCategoryForm = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
+        }).then(() => getCategories())
     }
 
     return (
-        <form className='form' onSubmit={(e) => createCategory(e, name, parentName)}>
-            <div>
-                <span>Название категории</span>
-                <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
-            </div>
-            <div>
-                <span>ID родителя</span>
-                <input onChange={(el) => setParentName(el.target.value)} value={parentName} type="number"/>
-            </div>
+        <div>
+            <button className='title' onClick={() => setIsShow(!isShow)}>Создание категории</button>
+            {isShow && <form className='form' onSubmit={(e) => createCategory(e, name, parentName)}>
+                <div>
+                    <span>Название категории</span>
+                    <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
+                </div>
+                <div>
+                    <span>ID родителя</span>
+                    <input onChange={(el) => setParentName(el.target.value)} value={parentName} type="number"/>
+                </div>
 
-            <button>Создать категорию</button>
-        </form>
+                <button>Создать категорию</button>
+            </form>}
+        </div>
     );
 };
 

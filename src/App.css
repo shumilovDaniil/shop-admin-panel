@@ -1,7 +1,32 @@
+.title {
+    font-size: 20px;
+}
+
 .container {
     max-width: 1230px;
     padding: 0 20px;
     margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+.form {
+    border: 2px solid #6c7ae0;
+    padding: 0 15px 10px;
+    min-width: 320px;
+}
+
+.form span {
+    display: flex;
+    padding: 7px 0;
+}
+
+.title {
+    padding: 10px;
+    border: 2px solid #6c7ae0;
 }
 
 .table {
@@ -12,6 +37,7 @@
 
 .table.products {
     grid-template-columns: minmax(150px, 1fr)
+    minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)

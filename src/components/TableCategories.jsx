@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const TableCategories = ({categories}) => {
+const TableCategories = ({categories, getCategories}) => {
     const [isShow, setIsShow] = useState(true)
 
     const getCategoryParent = (id) => {
@@ -9,14 +9,9 @@ const TableCategories = ({categories}) => {
     }
 
     const deleteCategory = async (id) => {
-        const res = await fetch('http://shopyshop.somee.com/AdminPanel/DeleteCategory', {
-            method: 'DELETE',
-            body: JSON.stringify({id: id}),
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+        const res = await fetch(`http://shopyshop.somee.com/AdminPanel/DeleteCategory/${id}`, {
+            method: 'DELETE'
+        }).then(() => getCategories())
     }
 
     return (
@@ -51,7 +46,9 @@ const TableCategories = ({categories}) => {
                                     )
                                 })}
                             </td>
-                            <td onClick={() => deleteCategory(categoryId)}>Удалить</td>
+                            <td onClick={() => deleteCategory(categoryId)}>
+                                <button>Удалить</button>
+                            </td>
                         </tr>
                     )
                 })}
