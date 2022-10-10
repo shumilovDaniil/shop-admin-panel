@@ -69,7 +69,6 @@ const CreateProductForm = ({getProducts}) => {
                     <input onChange={(el) => setRating(el.target.value)} value={rating} type="number"/>
                 </div>
 
-
                 <button>Создать товар</button>
                 {error.isError ? error.errorInfo.map((error) => {
                     return (

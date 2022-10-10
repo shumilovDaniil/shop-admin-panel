@@ -4,7 +4,7 @@
 
 .container {
     max-width: 1230px;
-    padding: 0 20px;
+    padding: 30px 20px 0;
     margin: 0 auto;
 }
 
@@ -36,12 +36,16 @@
 }
 
 .table.products {
+
     grid-template-columns: minmax(150px, 1fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 3.33fr);
+
+    grid-template-rows: 50px auto;
+
 }
 
 .table.categories {
@@ -63,7 +67,9 @@ td {
     padding: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
 }
 
 th {
@@ -107,4 +113,8 @@ tr:nth-child(even) td {
     flex-direction: column;
     max-width: 200px;
     gap: 5px;
+}
+
+.col_descr {
+    font-size: 12px;
 }

@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
+import ProductRow from "./ProductRow";
 
 const TableProducts = ({products, getProducts}) => {
     const [isShow, setIsShow] = useState(true)
-
-    const deleteProduct = async (id) => {
-        const res = await fetch(`http://shopyshop.somee.com/AdminPanel/DeleteProduct/${id}`, {
-            method: 'DELETE'
-        }).then(() => getProducts())
-    }
 
     return (
         <div>
@@ -28,18 +23,8 @@ const TableProducts = ({products, getProducts}) => {
                 </thead>
                 <tbody className="product_col">
                 {products.map((product) => {
-                    const {name, id, categoryId, categoryName, features, info, price, rating} = product
                     return (
-                        <tr key={categoryId} className="product_item product_col">
-                            <td>{id}</td>
-                            <td>{name}</td>
-                            <td>{categoryName}</td>
-                            <td>{info}</td>
-                            <td>{price}</td>
-                            <td onClick={() => deleteProduct(id)}>
-                                <button>Удалить</button>
-                            </td>
-                        </tr>
+                        <ProductRow key={product.id} {...product} getProducts={getProducts}/>
                     )
                 })}
                 </tbody>
