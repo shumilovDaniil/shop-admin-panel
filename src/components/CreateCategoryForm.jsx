@@ -5,6 +5,7 @@ const CreateCategoryForm = ({getCategories}) => {
 
     const [name, setName] = useState('');
     const [parentName, setParentName] = useState('');
+    const [features, setFeatures] = useState('')
 
     const createCategory = async (e, name, parentCategoryId) => {
         e.preventDefault();
@@ -33,6 +34,11 @@ const CreateCategoryForm = ({getCategories}) => {
                 <div>
                     <span>ID родителя</span>
                     <input onChange={(el) => setParentName(el.target.value)} value={parentName} type="number"/>
+                </div>
+                <div>
+                    <span>Параметры (через запятую)</span>
+                    <textarea onChange={(el) => setFeatures(el.target.value)} value={features} id="" cols="40"
+                              rows="5"></textarea>
                 </div>
 
                 <button>Создать категорию</button>

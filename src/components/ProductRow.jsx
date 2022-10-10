@@ -21,25 +21,26 @@ const ProductRow = (product) => {
     const editProduct = async () => {
         setIsEdit(!isEdit)
 
-        console.log(Number(price + .0))
-
         if (isEdit) {
-            const res = await fetch("http://shopyshop.somee.com/AdminPanel/EditProduct", {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "productId": id,
-                    "name": name,
-                    "categoryId": categoryId,
-                    "info": info,
-                    "price": Number(price + '.0'),
-                    "rating": rating
+            try {
+                const res = await fetch("http://shopyshop.somee.com/AdminPanel/EditProduct", {
+                    method: 'PUT',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "productId": id,
+                        "name": name,
+                        "categoryId": categoryId,
+                        "info": info,
+                        "price": Number(price),
+                        "rating": Number(rating)
+                    })
                 })
-            })
-                .then((res) => console.log(res))
-                .then(() => product.getProducts())
+                    .then(() => product.getProducts())
+            } catch (error) {
+                throw new Error(error)
+            }
         }
     }
 
