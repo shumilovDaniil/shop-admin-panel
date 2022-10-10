@@ -17,6 +17,7 @@ const TableProducts = ({products, getProducts}) => {
                     <th>Продукт</th>
                     <th>Категория</th>
                     <th>Описание</th>
+                    <th>Рейтинг</th>
                     <th>Цена</th>
                     <th>Действия</th>
                 </tr>

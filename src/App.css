@@ -42,7 +42,8 @@
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
-    minmax(150px, 3.33fr);
+    minmax(150px, 1.67fr)
+    minmax(150px, 0.33fr);
 
     grid-template-rows: 50px auto;
 
@@ -53,7 +54,7 @@
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
     minmax(150px, 1.67fr)
-    minmax(150px, 1.67fr)
+    minmax(150px, 0.33fr);
 }
 
 thead,

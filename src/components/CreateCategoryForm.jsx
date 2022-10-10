@@ -2,47 +2,63 @@ import React, {useState} from 'react';
 
 const CreateCategoryForm = ({getCategories}) => {
     const [isShow, setIsShow] = useState(false)
-
     const [name, setName] = useState('');
-    const [parentName, setParentName] = useState('');
-    const [features, setFeatures] = useState('')
+    const [categoryId, setCategoryId] = useState('');
+    const [error, setError] = useState({isError: false, errorInfo: []})
 
-    const createCategory = async (e, name, parentCategoryId) => {
+
+    const createCategory = async (e, name, categoryId) => {
         e.preventDefault();
 
-        const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateCategory", {
-            method: 'POST',
-            body: JSON.stringify({
-                name: name,
-                parentCategoryId: Number(parentCategoryId)
-            }),
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(() => getCategories())
+        if (name && categoryId) {
+            const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateCategory", {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: name,
+                    parentCategoryId: Number(categoryId)
+                }),
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => getCategories())
+        } else {
+            setError({
+                isError: true, errorInfo: [{
+                    name: name || typeof name,
+                    categoryId: categoryId || typeof categoryId,
+                }]
+            })
+        }
     }
 
     return (
         <div>
             <button className='title' onClick={() => setIsShow(!isShow)}>Создание категории</button>
-            {isShow && <form className='form' onSubmit={(e) => createCategory(e, name, parentName)}>
+            {isShow && <form className='form' onSubmit={(e) => createCategory(e, name, categoryId)}>
                 <div>
                     <span>Название категории</span>
                     <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
                 </div>
                 <div>
                     <span>ID родителя</span>
-                    <input onChange={(el) => setParentName(el.target.value)} value={parentName} type="number"/>
-                </div>
-                <div>
-                    <span>Параметры (через запятую)</span>
-                    <textarea onChange={(el) => setFeatures(el.target.value)} value={features} id="" cols="40"
-                              rows="5"></textarea>
+                    <input onChange={(el) => setCategoryId(el.target.value)} value={categoryId} type="number"/>
                 </div>
 
+
                 <button>Создать категорию</button>
-            </form>}
+                {error.isError ? error.errorInfo.map((error) => {
+                    return (
+                        <div>
+                            <span>Ошибка!</span>
+                            <span>name: {error.name}</span>
+                            <span>parentName: {error.parentName}</span>
+                        </div>
+                    )
+                }) : ''}
+            </form>
+            }
         </div>
     );
 };

@@ -1,18 +1,8 @@
 import React, {useState} from 'react';
+import CategoryRow from "./CategoryRow";
 
 const TableCategories = ({categories, getCategories}) => {
     const [isShow, setIsShow] = useState(true)
-
-    const getCategoryParent = (id) => {
-        let categoryParent = categories.find((category) => category.categoryId === id)
-        return categoryParent.name
-    }
-
-    const deleteCategory = async (id) => {
-        const res = await fetch(`http://shopyshop.somee.com/AdminPanel/DeleteCategory/${id}`, {
-            method: 'DELETE'
-        }).then(() => getCategories())
-    }
 
     return (
         <div>
@@ -32,24 +22,13 @@ const TableCategories = ({categories, getCategories}) => {
                 </thead>
                 <tbody className="product_col">
                 {categories.map((category) => {
-                    const {categoryId, name, features, parentCategoryId} = category
                     return (
-                        <tr key={categoryId} className="product_item product_col">
-                            <td>{categoryId}</td>
-                            <td>{name}</td>
-                            <td>{parentCategoryId ? getCategoryParent(parentCategoryId) : ''}</td>
-                            <td className='category_feature'>
-                                {features.map((feature) => {
-                                    return (
-                                        <span
-                                            key={`${feature.name}_`}>{feature.name}</span>
-                                    )
-                                })}
-                            </td>
-                            <td onClick={() => deleteCategory(categoryId)}>
-                                <button>Удалить</button>
-                            </td>
-                        </tr>
+                        <CategoryRow
+                            key={category.categoryId}
+                            getCategories={getCategories}
+                            categories={categories}
+                            {...category}
+                        />
                     )
                 })}
                 </tbody>

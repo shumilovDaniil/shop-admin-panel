@@ -71,6 +71,13 @@ const ProductRow = (product) => {
                     />}
                 </td>
                 <td>
+                    {product.rating}
+                    {isEdit && <input
+                        type="number" value={rating}
+                        onChange={(e) => setRating(Number(e.target.value))}
+                    />}
+                </td>
+                <td>
                     {product.price}
                     {isEdit && <input
                         type="text" value={price}
