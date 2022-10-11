@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/shop-admin-panel/static/css/main.880da7df.css",
+    "main.js": "/shop-admin-panel/static/js/main.27c7745d.js",
+    "index.html": "/shop-admin-panel/index.html",
+    "main.880da7df.css.map": "/shop-admin-panel/static/css/main.880da7df.css.map",
+    "main.27c7745d.js.map": "/shop-admin-panel/static/js/main.27c7745d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.880da7df.css",
+    "static/js/main.27c7745d.js"
+  ]
+}
