@@ -6,9 +6,8 @@ const TableCategories = ({categories, getCategories}) => {
 
     return (
         <div>
-            <h2>
-                <button onClick={() => setIsShow(!isShow)}>Список категорий</button>
-            </h2>
+            <h2 className='cursor-pointer btn_blue inline-block' onClick={() => setIsShow(!isShow)}>Список
+                категорий</h2>
 
             {isShow && <table className="table categories">
                 <thead className="product_col">

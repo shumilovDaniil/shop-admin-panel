@@ -35,19 +35,21 @@ const CreateCategoryForm = ({getCategories}) => {
 
     return (
         <div>
-            <button className='title' onClick={() => setIsShow(!isShow)}>Создание категории</button>
+            <button className='btn_blue' onClick={() => setIsShow(!isShow)}>Создание категории</button>
             {isShow && <form className='form' onSubmit={(e) => createCategory(e, name, categoryId)}>
-                <div>
-                    <span>Название категории</span>
-                    <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
-                </div>
-                <div>
-                    <span>ID родителя</span>
-                    <input onChange={(el) => setCategoryId(el.target.value)} value={categoryId} type="number"/>
+                <div className='mb-3'>
+                    <div>
+                        <span>Название категории</span>
+                        <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
+                    </div>
+                    <div>
+                        <span>ID родителя</span>
+                        <input onChange={(el) => setCategoryId(el.target.value)} value={categoryId} type="number"/>
+                    </div>
                 </div>
 
 
-                <button>Создать категорию</button>
+                <button className='btn_green'>Создать категорию</button>
                 {error.isError ? error.errorInfo.map((error) => {
                     return (
                         <div>

@@ -1,10 +1,10 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import TableCategories from "./components/TableCategories";
-import TableProducts from "./components/TableProducts";
 import CreateCategoryForm from "./components/CreateCategoryForm";
 import CreateProductForm from "./components/CreateProductForm";
 import axios from "axios";
+import TableProducts from "./components/TableProducts";
+import TableCategories from "./components/TableCategories";
 
 function App() {
     const [products, setProducts] = useState([])
@@ -28,14 +28,16 @@ function App() {
     }
 
     return (
-        <div className='container'>
-            <div className='flex'>
+        <div className='p-4 flex'>
+            <div className='forms_wrapper flex flex-col border-r-4 border-blue-600 pr-4'>
                 <CreateCategoryForm getCategories={() => getCategories()}/>
                 <CreateProductForm getProducts={() => getProducts()}/>
             </div>
 
-            <TableProducts products={products} getProducts={() => getProducts()}/>
-            <TableCategories categories={categories} getCategories={() => getCategories()}/>
+            <div className='flex gap-2 flex-col'>
+                <TableProducts products={products} getProducts={() => getProducts()}/>
+                <TableCategories categories={categories} getCategories={() => getCategories()}/>
+            </div>
         </div>
     );
 }

@@ -53,24 +53,39 @@ const CategoryRow = ({getCategories, features, categories, categoryId, name, par
             <td>{categoryId}</td>
             <td>{name}</td>
             <td>{parentCategoryId ? getCategoryParent(parentCategoryId) : ''}</td>
-            <td className='category_feature'>
+            <td>
                 {features?.map((feature) => {
                     return (
-                        <span
-                            key={`${feature.name}_`}>{feature.name}</span>
+                        <span className='bg-blue-500 px-2 text-white'
+                              key={`${feature.name}_`}>{feature.name}</span>
                     )
                 })}
 
-                {isEdit && <div>
-                    <span>Параметры (через запятую)</span>
-                    <textarea value={featuresInput} onChange={(e) => setFeaturesInput(e.target.value)} id=""
-                              cols="40"
-                              rows="5"></textarea>
-                </div>}
+                {
+                    isEdit && <div>
+                        <span className='text-black p-1 inline-block mb-2 bg-amber-300'>Параметры (через запятую)</span>
+                        <textarea value={featuresInput} onChange={(e) => setFeaturesInput(e.target.value)} id=""
+                                  cols="40"
+                                  rows="3"></textarea>
+                    </div>
+                }
             </td>
-            <td>
-                <button onClick={() => deleteCategory(categoryId)}>Delete</button>
-                <button onClick={() => createCategoryFeatures(categoryId)}>Add features</button>
+            <td className='flex'>
+                {isEdit ? <div className='flex flex-col'>
+                        <button
+                            className='btn_green'
+                            onClick={() => createCategoryFeatures(categoryId)}>Save
+                        </button>
+                        <button className='btn_gray' onClick={() => setIsEdit(!isEdit)}>Cancel</button>
+                    </div>
+
+                    :
+                    <div>
+                        <button className='btn_red mb-2' onClick={() => deleteCategory(categoryId)}>Delete</button>
+                        <button className='btn_blue' onClick={() => createCategoryFeatures(categoryId)}>Add
+                            features
+                        </button>
+                    </div>}
             </td>
         </tr>
     );
