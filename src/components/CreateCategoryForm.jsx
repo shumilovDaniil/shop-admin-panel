@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
+import CategorySelect from "../ui/CategorySelect";
 
-const CreateCategoryForm = ({getCategories}) => {
+const CreateCategoryForm = ({getCategories, categories}) => {
     const [isShow, setIsShow] = useState(false)
     const [name, setName] = useState('');
-    const [categoryId, setCategoryId] = useState('');
     const [error, setError] = useState({isError: false, errorInfo: []})
-
+    const [categoryId, setCategoryId] = useState(0);
 
     const createCategory = async (e, name, categoryId) => {
         e.preventDefault();
@@ -15,7 +15,7 @@ const CreateCategoryForm = ({getCategories}) => {
                 method: 'POST',
                 body: JSON.stringify({
                     name: name,
-                    parentCategoryId: Number(categoryId)
+                    parentCategoryId: categoryId
                 }),
                 mode: 'cors',
                 headers: {
@@ -33,6 +33,10 @@ const CreateCategoryForm = ({getCategories}) => {
         }
     }
 
+    const getCategoryId = (id) => {
+        setCategoryId(id)
+    }
+
     return (
         <div>
             <button className='btn_blue' onClick={() => setIsShow(!isShow)}>Создание категории</button>
@@ -43,16 +47,14 @@ const CreateCategoryForm = ({getCategories}) => {
                         <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
                     </div>
                     <div>
-                        <span>ID родителя</span>
-                        <input onChange={(el) => setCategoryId(el.target.value)} value={categoryId} type="number"/>
+                        <span>Родительская категория</span>
+                        <CategorySelect categories={categories} getCategoryId={getCategoryId}/>
                     </div>
                 </div>
-
-
                 <button className='btn_green'>Создать категорию</button>
-                {error.isError ? error.errorInfo.map((error) => {
+                {error.isError ? error.errorInfo.map((error, idx) => {
                     return (
-                        <div>
+                        <div key={error.name + idx}>
                             <span>Ошибка!</span>
                             <span>name: {error.name}</span>
                             <span>parentName: {error.parentName}</span>

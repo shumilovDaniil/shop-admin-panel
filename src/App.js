@@ -30,7 +30,7 @@ function App() {
     return (
         <div className='p-4 flex'>
             <div className='forms_wrapper flex flex-col border-r-4 border-blue-600 pr-4'>
-                <CreateCategoryForm getCategories={() => getCategories()}/>
+                <CreateCategoryForm getCategories={() => getCategories()} categories={categories}/>
                 <CreateProductForm getProducts={() => getProducts()}/>
             </div>
 

@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import CategorySelect from "../ui/CategorySelect";
+import axios from "axios";
 
 const ProductRow = (product) => {
     const [isEdit, setIsEdit] = useState(false)
-
     const [id, setId] = useState(product.id)
     const [name, setName] = useState(product.name)
     const [categoryId, setCategoryId] = useState(product.categoryId)
@@ -12,6 +13,11 @@ const ProductRow = (product) => {
     const [price, setPrice] = useState(product.price)
     const [rating, setRating] = useState(product.rating)
     const [showMore, setShowMore] = useState(false)
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        getCategories()
+    }, [])
 
     const deleteProduct = async (id) => {
         const res = await fetch(`http://shopyshop.somee.com/AdminPanel/DeleteProduct/${id}`, {
@@ -42,6 +48,17 @@ const ProductRow = (product) => {
         setIsEdit(!isEdit)
     }
 
+
+    const getCategories = async () => {
+        const res = axios.get(`http://shopyshop.somee.com/Shop/GetCategories`).then(res => {
+            setCategories(res.data)
+        })
+    }
+
+    const getCategoryId = (id) => {
+        setCategoryId(id)
+    }
+
     return (
         <>
             <tr className="product_item product_col">
@@ -54,13 +71,14 @@ const ProductRow = (product) => {
                         type="text"
                     />}
                 </td>
+
+
                 <td className='flex flex-col items-start'>
                     {product.categoryName}
-                    {isEdit && <input
-                        type="number" value={categoryId}
-                        onChange={(e) => setCategoryId(Number(e.target.value))}
-                    />}
+                    {isEdit && <CategorySelect categories={categories} getCategoryId={getCategoryId}/>}
                 </td>
+
+
                 <td className='col_descr flex flex-col'>
 
                     <p onClick={() => setShowMore(!showMore)}>{showMore ? product.info :

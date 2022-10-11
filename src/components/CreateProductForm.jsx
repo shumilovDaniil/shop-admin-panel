@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import CategorySelect from "../ui/CategorySelect";
+import axios from "axios";
 
 const CreateProductForm = ({getProducts}) => {
     const [isShow, setIsShow] = useState(false)
@@ -9,6 +11,7 @@ const CreateProductForm = ({getProducts}) => {
     const [price, setPrice] = useState()
     const [rating, setRating] = useState()
     const [error, setError] = useState({isError: false, errorInfo: []})
+    const [categories, setCategories] = useState([])
 
     const createProduct = async (e) => {
         e.preventDefault();
@@ -41,6 +44,20 @@ const CreateProductForm = ({getProducts}) => {
         }
     }
 
+    useEffect(() => {
+        getCategories()
+    }, [])
+
+    const getCategories = async () => {
+        const res = axios.get(`http://shopyshop.somee.com/Shop/GetCategories`).then(res => {
+            setCategories(res.data)
+        })
+    }
+
+    const getCategoryId = (id) => {
+        setCategoryId(id)
+    }
+
     return (
         <div>
             <button className='btn_blue' onClick={() => setIsShow(!isShow)}>Создание продукта</button>
@@ -48,29 +65,25 @@ const CreateProductForm = ({getProducts}) => {
                 <div className='mb-3'>
                     <div>
                         <span>Название продукта</span>
-                        <input onChange={(el) => setName(el.target.value)} value={name} type="text"/>
+                        <input onChange={(e) => setName(e.target.value)} value={name} type="text"/>
                     </div>
                     <div>
                         <span>ID категории</span>
-                        <input onChange={(el) => setCategoryId(el.target.value)} value={categoryId} type="number"/>
+                        <CategorySelect categories={categories} getCategoryId={getCategoryId}/>
                     </div>
-
                     <div>
                         <span>Описание</span>
-                        <input onChange={(el) => setDescription(el.target.value)} value={description} type="text"/>
+                        <input onChange={(e) => setDescription(e.target.value)} value={description} type="text"/>
                     </div>
-
                     <div>
                         <span>Цена</span>
-                        <input onChange={(el) => setPrice(el.target.value)} value={price} type="number"/>
+                        <input onChange={(e) => setPrice(e.target.value)} value={price} type="number"/>
                     </div>
-
                     <div>
                         <span>Рейтинг</span>
-                        <input onChange={(el) => setRating(el.target.value)} value={rating} type="number"/>
+                        <input onChange={(e) => setRating(e.target.value)} value={rating} type="number"/>
                     </div>
                 </div>
-
                 <button className='btn_green'>Создать товар</button>
                 {error.isError ? error.errorInfo.map((error) => {
                     return (
