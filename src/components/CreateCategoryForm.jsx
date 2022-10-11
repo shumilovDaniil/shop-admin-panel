@@ -10,7 +10,7 @@ const CreateCategoryForm = ({getCategories, categories}) => {
     const createCategory = async (e, name, categoryId) => {
         e.preventDefault();
 
-        if (name && categoryId) {
+        if (name) {
             const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateCategory", {
                 method: 'POST',
                 body: JSON.stringify({

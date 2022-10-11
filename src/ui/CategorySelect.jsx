@@ -4,19 +4,23 @@ const CategorySelect = ({categories, getCategoryId}) => {
     const [categoryId, setCategoryId] = useState(0);
 
     useEffect(() => {
-        console.log(categoryId)
-        getCategoryId(categoryId)
+        const id = Number(categoryId)
+
+        if (id) {
+            getCategoryId(id)
+            console.log(id, 1)
+        } else {
+            getCategoryId(null)
+        }
     }, [categoryId])
+
 
     return (
         <>
             <select
-                value={categoryId}
-                onChange={(e) => setCategoryId(Number(e.target.value))}
+                onChange={(e) => setCategoryId(e.target.value)}
             >
-                <option defaultChecked>
-                    Категория
-                </option>
+                <option value={null} defaultChecked>Без категории</option>
                 {categories.map((category) => {
                     return (
                         <option

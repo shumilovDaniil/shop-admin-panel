@@ -16,7 +16,10 @@ const CreateProductForm = ({getProducts}) => {
     const createProduct = async (e) => {
         e.preventDefault();
         setError({isError: false, errorInfo: []})
-        if (name && categoryId && description && price && rating) {
+
+        console.log(categoryId)
+
+        if (name && description && price && rating) {
             const res = await fetch("http://shopyshop.somee.com/AdminPanel/CreateProduct", {
                 method: 'POST',
                 body: JSON.stringify({
