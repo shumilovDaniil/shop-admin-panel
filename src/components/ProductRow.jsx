@@ -48,7 +48,6 @@ const ProductRow = (product) => {
         setIsEdit(!isEdit)
     }
 
-
     const getCategories = async () => {
         const res = axios.get(`http://shopyshop.somee.com/Shop/GetCategories`).then(res => {
             setCategories(res.data)
@@ -71,7 +70,6 @@ const ProductRow = (product) => {
                         type="text"
                     />}
                 </td>
-
 
                 <td className='flex flex-col items-start'>
                     {product.categoryName}
